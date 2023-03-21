@@ -1,34 +1,60 @@
-﻿var name = "Ewa";
-char sex = 'f';
-var age = 33;
+﻿using System.Diagnostics.Metrics;
 
-if (sex == 'f')
+int number = 48465;
+string numberAsString = number.ToString();
+char[] letters = numberAsString.ToArray();
+
+List<int> counters = new List<int>();
+for (int i = 0; i < 10; i++)
 {
-    if (age < 30)
+    counters.Add(0);
+}
+
+foreach (char letter in letters)
+{
+    if (letter == '0')
     {
-        Console.WriteLine("Kobieta poniżej 30 lat");
+        counters[0]++;
     }
-    else if (age == 33 && name == "Ewa")
+    else if (letter == '1')
     {
-        Console.WriteLine("Ewa, lat 33");
+        counters[1]++;
     }
-    else
+    else if (letter == '2')
     {
-        Console.WriteLine("Kobieta powyżej 30 lat");
+        counters[2]++;
+    }
+    else if (letter == '3')
+    {
+        counters[3]++;
+    }
+    else if (letter == '4')
+    {
+        counters[4]++;
+    }
+    else if (letter == '5')
+    {
+        counters[5]++;
+    }
+    else if (letter == '6')
+    {
+        counters[6]++;
+    }
+    else if (letter == '7')
+    {
+        counters[7]++;
+    }
+    else if (letter == '8')
+    {
+        counters[8]++;
+    }
+    else if (letter == '9')
+    {
+        counters[9]++;
     }
 }
-else if (sex == 'm')
+
+for (int i = 0; i < counters.Count; i++)
 {
-    if (age >= 18)
-    {
-        Console.WriteLine("Mężczyzna pełnoletni " + name);
-    }
-    else 
-    {
-        Console.WriteLine("Mężczyzna niepełnoletni " + name);
-    }
-}
-else
-{
-    Console.WriteLine("Nie odpowiedni znak");
+    Console.WriteLine("cyfry " + i + " jest " + counters[i]);
 }
