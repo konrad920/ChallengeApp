@@ -1,60 +1,37 @@
-﻿using System.Diagnostics.Metrics;
+﻿using ChallengeApp;
 
-int number = 48465;
-string numberAsString = number.ToString();
-char[] letters = numberAsString.ToArray();
+var employ1 = new Employee("jacek", "kowalski", 32);
+var employ2 = new Employee("Zuzia", "ładna", 21);
+var employ3 = new Employee("MaCiek", "Józefek", 25);
 
-List<int> counters = new List<int>();
-for (int i = 0; i < 10; i++)
+int[] pointsOfFirstEmployee = {5, 8, 4, 2, 7};
+int[] pointsOfSecondEmployee = { 1, 9, 6, 7, 2 };
+int[] pointsOfThirdEmployee = { 6, 8, 3, 2, 4 };
+
+for (int i = 0; i < 5;  i++)
 {
-    counters.Add(0);
+    employ1.AddPoints(pointsOfFirstEmployee[i]);
+    employ2.AddPoints(pointsOfSecondEmployee[i]);
+    employ3.AddPoints(pointsOfThirdEmployee[i]);
 }
 
-foreach (char letter in letters)
+List <Employee> employes = new List<Employee>()
 {
-    if (letter == '0')
+    employ1, employ2, employ3
+};
+
+
+int theBestScore = -1;
+Employee EmployeeWithMaxResult = null;
+
+foreach (var employ in employes)
+{
+    if (employ.Score > theBestScore)
     {
-        counters[0]++;
-    }
-    else if (letter == '1')
-    {
-        counters[1]++;
-    }
-    else if (letter == '2')
-    {
-        counters[2]++;
-    }
-    else if (letter == '3')
-    {
-        counters[3]++;
-    }
-    else if (letter == '4')
-    {
-        counters[4]++;
-    }
-    else if (letter == '5')
-    {
-        counters[5]++;
-    }
-    else if (letter == '6')
-    {
-        counters[6]++;
-    }
-    else if (letter == '7')
-    {
-        counters[7]++;
-    }
-    else if (letter == '8')
-    {
-        counters[8]++;
-    }
-    else if (letter == '9')
-    {
-        counters[9]++;
+        EmployeeWithMaxResult = employ;
+        theBestScore = employ.Score;
     }
 }
 
-for (int i = 0; i < counters.Count; i++)
-{
-    Console.WriteLine("cyfry " + i + " jest " + counters[i]);
-}
+Console.WriteLine("Najwiecej punktów: " + EmployeeWithMaxResult.Score + " osiagnął, " + EmployeeWithMaxResult.Name 
+   + " " + EmployeeWithMaxResult.Surname + " lat " + EmployeeWithMaxResult.Age);
