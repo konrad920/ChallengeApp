@@ -4,7 +4,7 @@ var employ1 = new Employee("jacek", "kowalski", 32);
 var employ2 = new Employee("Zuzia", "ładna", 21);
 var employ3 = new Employee("MaCiek", "Józefek", 25);
 
-int[] pointsOfFirstEmployee = {5, 8, 4, 2, 7};
+int[] pointsOfFirstEmployee = {9, 9, 9, 9, 9};
 int[] pointsOfSecondEmployee = { 1, 9, 6, 7, 2 };
 int[] pointsOfThirdEmployee = { 6, 8, 3, 2, 4 };
 
