@@ -8,6 +8,10 @@
             this .Login = login;
             this .Password = password;
         }
+        public User(string login)
+        {
+            this.Login = login;
+        }
 
         public string Login { get; private set; }
         public string Password { get; private set; }
