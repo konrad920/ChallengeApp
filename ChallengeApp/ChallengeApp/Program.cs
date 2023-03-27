@@ -1,9 +1,12 @@
 ﻿using ChallengeApp;
 
 var employee = new Employee("jacek", "kowalski");
-employee.AddGrade(3.5f);
-employee.AddGrade(-2.4f);
-employee.AddGrade(6);
+employee.AddGrade(4000);
+employee.AddGrade("adam");
+employee.AddGrade(6d);
+employee.AddGrade("2");
+employee.AddGrade(double.MaxValue);
+employee.AddGrade('d');
 var statistic = employee.GetStatistics();
 
 Console.WriteLine($"Wartosc minimalna: {statistic.Min}");
