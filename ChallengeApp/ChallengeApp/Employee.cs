@@ -75,10 +75,90 @@
                 maximum = Math.Max(maximum, grade);
                 statistics.Averange += grade;
             }
-            statistics.Averange /= grades.Count;
+            statistics.Averange /= this.grades.Count;
             statistics.Max = maximum;
             statistics.Min = minimum;
             return statistics;
+        }
+
+        public Statistics GetStatistickWithForeach()
+        {
+            var statistick = new Statistics();
+            float maximum = float.MinValue;
+            float minimum = float.MaxValue;
+            statistick.Averange = 0;
+
+            foreach ( var grade in this.grades)
+            {
+                maximum = Math.Max(maximum, grade);
+                minimum = Math.Min(minimum, grade);
+                statistick.Averange += grade;
+            }
+            statistick.Max = maximum;
+            statistick.Min = minimum;
+            statistick.Averange /= this.grades.Count;
+            return statistick;
+        }
+
+        public Statistics GetStatistickWithFor()
+        {
+            var statistick = new Statistics();
+            float maximum = float.MinValue;
+            float minimum = float.MaxValue;
+            statistick.Averange = 0;
+
+            for ( var grade = 0; grade < this.grades.Count; grade++ )
+            {
+                maximum = Math.Max(maximum, this.grades[grade]);
+                minimum = Math.Min(minimum, this.grades[grade]);
+                statistick.Averange += this.grades[grade];
+            }
+            statistick.Max = maximum;
+            statistick.Min = minimum;
+            statistick.Averange /= this.grades.Count;
+            return statistick;
+        }
+
+        public Statistics GetStatistickWithDoWhile()
+        {
+            var statistick = new Statistics();
+            float maximum = float.MinValue;
+            float minimum = float.MaxValue;
+            statistick.Averange = 0;
+
+            int index = 0;
+            do
+            {
+                maximum = Math.Max(maximum, this.grades[index]);
+                minimum = Math.Min(minimum, this.grades[index]);
+                statistick.Averange += this.grades[index];
+                index++;
+            } while (index < this.grades.Count);
+            statistick.Max = maximum;
+            statistick.Min = minimum;
+            statistick.Averange /= this.grades.Count;
+            return statistick;
+        }
+
+        public Statistics GetStatistickWithWhile()
+        {
+            var statistick = new Statistics();
+            float maximum = float.MinValue;
+            float minimum = float.MaxValue;
+            statistick.Averange = 0;
+
+            int index = 0;
+            while(index < this.grades.Count)
+            {
+                maximum = Math.Max(maximum, this.grades[index]);
+                minimum = Math.Min(minimum, this.grades[index]);
+                statistick.Averange += this.grades[index];
+                index++;
+            }
+            statistick.Max = maximum;
+            statistick.Min = minimum;
+            statistick.Averange /= this.grades.Count;
+            return statistick;
         }
     }
 }
