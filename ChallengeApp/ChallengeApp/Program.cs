@@ -1,30 +1,23 @@
 ﻿using ChallengeApp;
+Console.WriteLine("Witaj w moim programie do oceny Pracowników");
+Console.WriteLine("=============================================");
+Console.WriteLine();
 
 var employee = new Employee("jacek", "kowalski");
-employee.AddGrade(4000);
-employee.AddGrade("adam");
-employee.AddGrade(6d);
-employee.AddGrade("2");
-employee.AddGrade(double.MaxValue);
-employee.AddGrade('d');
+
+while(true)
+{
+    Console.WriteLine("Podaj swoją ocenę:");
+    var input = Console.ReadLine();
+    if(input == "q" || input == "Q")
+    {
+        break;
+    }
+    employee.AddGrade(input);
+}
+
 var statistic = employee.GetStatistics();
-var statistic1 = employee.GetStatistickWithForeach();
-var statistic2 = employee.GetStatistickWithFor();
-var statistic3 = employee.GetStatistickWithDoWhile();
-var statistic4 = employee.GetStatistickWithWhile();
-
-Console.WriteLine($"Wartosc minimalna1: {statistic1.Min}");
-Console.WriteLine($"Wartosc maksymalna: {statistic1.Max}");
-Console.WriteLine($"Wartosc średnia: {statistic1.Averange:N2}");
-
-Console.WriteLine($"Wartosc minimalna2: {statistic2.Min}");
-Console.WriteLine($"Wartosc maksymalna: {statistic2.Max}");
-Console.WriteLine($"Wartosc średnia: {statistic2.Averange:N2}");
-
-Console.WriteLine($"Wartosc minimalna3: {statistic3.Min}");
-Console.WriteLine($"Wartosc maksymalna: {statistic3.Max}");
-Console.WriteLine($"Wartosc średnia: {statistic3.Averange:N2}");
-
-Console.WriteLine($"Wartosc minimalna4: {statistic4.Min}");
-Console.WriteLine($"Wartosc maksymalna: {statistic4.Max}");
-Console.WriteLine($"Wartosc średnia: {statistic4.Averange:N2}");
+Console.WriteLine($"Wartosc minimalna1: {statistic.Min}");
+Console.WriteLine($"Wartosc maksymalna: {statistic.Max}");
+Console.WriteLine($"Wartosc średnia: {statistic.Averange:N2}");
+Console.WriteLine($"Zdobyłeś literę: {statistic.AverangeLetter}");

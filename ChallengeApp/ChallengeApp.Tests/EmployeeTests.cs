@@ -93,21 +93,40 @@
         }
 
         [Test]
-        public void GetCharValueAsFloatShouldReturnCorrectMinValue()
+        public void GetCharValueShouldReturnCorrectGradeValue()
         {
             //arrange
+
             Employee employee1 = new Employee("Konrad", "Sowizral");
-            employee1.AddGrade(14);
-            employee1.AddGrade('2');
-            employee1.AddGrade(25);
+            employee1.AddGrade('b');
+
+            //act
+
+            var statistics1 = employee1.GetStatistics();
+            var reward = employee1.GetStatistics().Averange;
+
+            //assert
+            Assert.AreEqual(80, reward);
+        }
+
+        [Test]
+        public void GetSomeAverangeShouldReturnCorrectGradeLetter()
+        {
+            //arrange
+
+            Employee employee1 = new Employee("Konrad", "Sowizral");
+            employee1.AddGrade('c');
+            employee1.AddGrade(60);
+            employee1.AddGrade("90");
+            employee1.AddGrade(150);
+            employee1.AddGrade('e');
 
             //act
 
             var statistics1 = employee1.GetStatistics();
 
             //assert
-
-            Assert.AreEqual(2, statistics1.Min);
+            Assert.AreEqual('C', statistics1.AverangeLetter);
         }
     }
 }

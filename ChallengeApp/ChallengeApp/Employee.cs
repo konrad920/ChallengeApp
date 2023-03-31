@@ -23,7 +23,7 @@
         }
         public void AddGrade(string grade)
         {
-            if (float.TryParse(grade, out float result))
+            if (float.TryParse(grade, out float result) != false)
             {
                 AddGrade(result);
             }
@@ -49,18 +49,39 @@
             float value = (float)grade;
             AddGrade(value);
         }
+
         public void AddGrade(char grade)
         {
-            string word = grade.ToString();
-            if(float.TryParse(word, out float result))
+            switch(grade)
             {
-                AddGrade(result);
+                case 'A':
+                case 'a':
+                    AddGrade(100);
+                    break;
+                case 'B':
+                case 'b':
+                    AddGrade(80);
+                    break;
+                case 'C':
+                case 'c':
+                    AddGrade(60);
+                    break;
+                case 'D':
+                case 'd':
+                    AddGrade(40);
+                    break;
+                case 'E':
+                case 'e':
+                    AddGrade(20);
+                    break;
+                case 'F':
+                case 'f':
+                    AddGrade(0);
+                    break;
+                default:
+                    Console.WriteLine("Wrong letter");
+                    break;
             }
-            else
-            {
-                Console.WriteLine("This Char is not float");
-            }
-
         }
         public Statistics GetStatistics()
         {
@@ -78,87 +99,30 @@
             statistics.Averange /= this.grades.Count;
             statistics.Max = maximum;
             statistics.Min = minimum;
+
+            switch(statistics.Averange)
+            {
+                case var a when a >= 90:
+                    statistics.AverangeLetter = 'A';
+                    break;
+                case var a when a >= 70:
+                    statistics.AverangeLetter = 'B';
+                    break;
+                case var a when a >= 55:
+                    statistics.AverangeLetter = 'C';
+                    break;
+                case var a when a >= 40:
+                    statistics.AverangeLetter = 'D';
+                    break;
+                case var a when a >= 20:
+                    statistics.AverangeLetter = 'E';
+                    break;
+                default:
+                    statistics.AverangeLetter = 'F';
+                    break;
+            }
+
             return statistics;
-        }
-
-        public Statistics GetStatistickWithForeach()
-        {
-            var statistick = new Statistics();
-            float maximum = float.MinValue;
-            float minimum = float.MaxValue;
-            statistick.Averange = 0;
-
-            foreach ( var grade in this.grades)
-            {
-                maximum = Math.Max(maximum, grade);
-                minimum = Math.Min(minimum, grade);
-                statistick.Averange += grade;
-            }
-            statistick.Max = maximum;
-            statistick.Min = minimum;
-            statistick.Averange /= this.grades.Count;
-            return statistick;
-        }
-
-        public Statistics GetStatistickWithFor()
-        {
-            var statistick = new Statistics();
-            float maximum = float.MinValue;
-            float minimum = float.MaxValue;
-            statistick.Averange = 0;
-
-            for ( var grade = 0; grade < this.grades.Count; grade++ )
-            {
-                maximum = Math.Max(maximum, this.grades[grade]);
-                minimum = Math.Min(minimum, this.grades[grade]);
-                statistick.Averange += this.grades[grade];
-            }
-            statistick.Max = maximum;
-            statistick.Min = minimum;
-            statistick.Averange /= this.grades.Count;
-            return statistick;
-        }
-
-        public Statistics GetStatistickWithDoWhile()
-        {
-            var statistick = new Statistics();
-            float maximum = float.MinValue;
-            float minimum = float.MaxValue;
-            statistick.Averange = 0;
-
-            int index = 0;
-            do
-            {
-                maximum = Math.Max(maximum, this.grades[index]);
-                minimum = Math.Min(minimum, this.grades[index]);
-                statistick.Averange += this.grades[index];
-                index++;
-            } while (index < this.grades.Count);
-            statistick.Max = maximum;
-            statistick.Min = minimum;
-            statistick.Averange /= this.grades.Count;
-            return statistick;
-        }
-
-        public Statistics GetStatistickWithWhile()
-        {
-            var statistick = new Statistics();
-            float maximum = float.MinValue;
-            float minimum = float.MaxValue;
-            statistick.Averange = 0;
-
-            int index = 0;
-            while(index < this.grades.Count)
-            {
-                maximum = Math.Max(maximum, this.grades[index]);
-                minimum = Math.Min(minimum, this.grades[index]);
-                statistick.Averange += this.grades[index];
-                index++;
-            }
-            statistick.Max = maximum;
-            statistick.Min = minimum;
-            statistick.Averange /= this.grades.Count;
-            return statistick;
         }
     }
 }
