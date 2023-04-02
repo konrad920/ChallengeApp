@@ -7,10 +7,6 @@
             : base(name, surname, gender, age)
         {
         }
-
-        public char Gender { get; private set; }
-        public int Age { get; private set; }
-        public string Surname { get; private set; }
         public void AddGrade(float grade)
         {
             if(grade >= 0 && grade <= 100)
