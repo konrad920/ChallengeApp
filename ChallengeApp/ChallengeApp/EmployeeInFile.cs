@@ -1,8 +1,11 @@
-﻿namespace ChallengeApp
+﻿using System.Runtime.CompilerServices;
+
+namespace ChallengeApp
 {
     public class EmployeeInFile : EmployeeBase
     {
         private const string fileName = "grades.txt";
+
         public EmployeeInFile(string name, string surname) 
             : base(name, surname)
         {
@@ -86,64 +89,73 @@
             AddGrade(value);
         }
 
-        public override Statistics GetStatistics()
+        private List<float> GradesReadFromFile()
         {
-            var statistics = new Statistics();
-            float maximum = float.MinValue;
-            float minimum = float.MaxValue;
-            statistics.Averange = 0;
-            List<float> readGradesFromFile = new List<float>();
-
+            var grades = new List<float>();
             if (File.Exists(fileName))
             {
                 using (var reader = File.OpenText(fileName))
                 {
                     var line = reader.ReadLine();
-                    while (line != null)
+                    while(line != null)
                     {
-                        var result = float.Parse(line);
-                        readGradesFromFile.Add(result);
+                        var number = float.Parse(line);
+                        grades.Add(number);
                         line = reader.ReadLine();
                     }
                 }
-
-                foreach (var grade in readGradesFromFile)
-                {
-                    maximum = Math.Max(maximum, grade);
-                    minimum = Math.Min(minimum, grade);
-                    statistics.Averange += grade;
-                }
-
-                statistics.Averange /= readGradesFromFile.Count;
-                statistics.Max = maximum;
-                statistics.Min = minimum;
-                switch (statistics.Averange)
-                {
-                    case var a when a >= 90:
-                        statistics.AverangeLetter = 'A';
-                        break;
-                    case var a when a >= 70:
-                        statistics.AverangeLetter = 'B';
-                        break;
-                    case var a when a >= 55:
-                            statistics.AverangeLetter = 'C';
-                        break;
-                    case var a when a >= 40:
-                        statistics.AverangeLetter = 'D';
-                        break;
-                    case var a when a >= 20:
-                        statistics.AverangeLetter = 'E';
-                        break;
-                    default:
-                        statistics.AverangeLetter = 'F';
-                        break;
-                }
-                return statistics;
+                return grades;
             }
             else
             {
                 throw new Exception("File does not exists");
             }
+        }
+
+        private Statistics CountStatistics(List<float> grades)
+        {
+            var statistics = new Statistics();
+            float maximum = float.MinValue;
+            float minimum = float.MaxValue;
+            statistics.Averange = 0;
+            foreach (var grade in grades)
+            {
+                maximum = Math.Max(maximum, grade);
+                minimum = Math.Min(minimum, grade);
+                statistics.Averange += grade;
+            }
+            statistics.Averange /= grades.Count;
+            statistics.Max = maximum;
+            statistics.Min = minimum;
+            switch (statistics.Averange)
+            {
+                case var a when a >= 90:
+                    statistics.AverangeLetter = 'A';
+                    break;
+                case var a when a >= 70:
+                    statistics.AverangeLetter = 'B';
+                    break;
+                case var a when a >= 55:
+                    statistics.AverangeLetter = 'C';
+                    break;
+                case var a when a >= 40:
+                    statistics.AverangeLetter = 'D';
+                    break;
+                case var a when a >= 20:
+                    statistics.AverangeLetter = 'E';
+                    break;
+                default:
+                    statistics.AverangeLetter = 'F';
+                    break;
+            }
+            return statistics;
+        }
+
+        public override Statistics GetStatistics()
+        {
+            var ReadFromFile = this.GradesReadFromFile();
+            var result = this.CountStatistics(ReadFromFile);
+            return result;
         }
     }
 }
