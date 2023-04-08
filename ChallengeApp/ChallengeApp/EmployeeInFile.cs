@@ -6,9 +6,11 @@ namespace ChallengeApp
     {
         public override event GradeAddedDelegate GradeAdded;
 
-        private const string fileName = "grades.txt";
+        private const string fileNameGrades = "grades.txt";
 
-        public EmployeeInFile(string name, string surname) 
+        private const string fileNameScores = "scores.txt";
+
+        public EmployeeInFile(string name, string surname)
             : base(name, surname)
         {
         }
@@ -16,7 +18,7 @@ namespace ChallengeApp
         {
             if (grade >= 0 && grade <= 100)
             {
-                using (var writer = File.AppendText(fileName))
+                using (var writer = File.AppendText(fileNameGrades))
                 {
                     writer.WriteLine(grade);
                 }
@@ -95,12 +97,12 @@ namespace ChallengeApp
         private List<float> GradesReadFromFile()
         {
             var grades = new List<float>();
-            if (File.Exists(fileName))
+            if (File.Exists(fileNameGrades))
             {
-                using (var reader = File.OpenText(fileName))
+                using (var reader = File.OpenText(fileNameGrades))
                 {
                     var line = reader.ReadLine();
-                    while(line != null)
+                    while (line != null)
                     {
                         var number = float.Parse(line);
                         grades.Add(number);
@@ -118,38 +120,10 @@ namespace ChallengeApp
         private Statistics CountStatistics(List<float> grades)
         {
             var statistics = new Statistics();
-            float maximum = float.MinValue;
-            float minimum = float.MaxValue;
-            statistics.Averange = 0;
+
             foreach (var grade in grades)
             {
-                maximum = Math.Max(maximum, grade);
-                minimum = Math.Min(minimum, grade);
-                statistics.Averange += grade;
-            }
-            statistics.Averange /= grades.Count;
-            statistics.Max = maximum;
-            statistics.Min = minimum;
-            switch (statistics.Averange)
-            {
-                case var a when a >= 90:
-                    statistics.AverangeLetter = 'A';
-                    break;
-                case var a when a >= 70:
-                    statistics.AverangeLetter = 'B';
-                    break;
-                case var a when a >= 55:
-                    statistics.AverangeLetter = 'C';
-                    break;
-                case var a when a >= 40:
-                    statistics.AverangeLetter = 'D';
-                    break;
-                case var a when a >= 20:
-                    statistics.AverangeLetter = 'E';
-                    break;
-                default:
-                    statistics.AverangeLetter = 'F';
-                    break;
+                statistics.AddGrade(grade);
             }
             return statistics;
         }
@@ -158,6 +132,13 @@ namespace ChallengeApp
         {
             var ReadFromFile = this.GradesReadFromFile();
             var result = this.CountStatistics(ReadFromFile);
+            using (var writer = File.AppendText(fileNameScores))
+            {
+                writer.WriteLine($"Minimalna ocena to: {result.Min}");
+                writer.WriteLine($"Maksymalna ocena to: {result.Max}");
+                writer.WriteLine($"Średnia ocena to: {result.Averange}");
+                writer.WriteLine($"Średnia ocena jako litera to: {result.AverangeLetter:N2}");
+            }
             return result;
         }
     }

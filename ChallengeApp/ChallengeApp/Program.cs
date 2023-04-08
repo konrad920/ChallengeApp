@@ -13,18 +13,6 @@ void EmployeeGradeAdded(object sender, EventArgs args)
     Console.WriteLine("Dodano nowa ocene");
 }
 
-//try
-//{
-//    supervisor.AddGrade("2+15");
-//}
-//catch (Exception e)
-//{
-//    Console.WriteLine($"Exception catched: {e.Message}");
-//}
-
-//supervisor.AddGrade("2");
-//Console.WriteLine(supervisor.GetStatistics().Averange);
-
 while (true)
 {
     Console.WriteLine("Podaj swoją ocenę:");

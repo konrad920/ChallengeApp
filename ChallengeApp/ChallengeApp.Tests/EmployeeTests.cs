@@ -6,7 +6,7 @@
         public void IsAverangeCountCorrect()
         {
             //arrange
-            Employee employee1 = new Employee("Konrad", "Sowizral");
+            EmployeeInMemory employee1 = new EmployeeInMemory("Konrad", "Sowizral");
             employee1.AddGrade(2);
             employee1.AddGrade(2);
             employee1.AddGrade(6);
@@ -24,7 +24,7 @@
         public void IsMaximumReturCorrectValue()
         {
             //arrange
-            Employee employee1 = new Employee("Konrad", "Sowizral");
+            EmployeeInMemory employee1 = new EmployeeInMemory("Konrad", "Sowizral");
             employee1.AddGrade(7);
             employee1.AddGrade(2);
             employee1.AddGrade(1.4f);
@@ -42,7 +42,7 @@
         public void IsMinimumReturCorrectValue()
         {
             //arrange
-            Employee employee1 = new Employee("Konrad", "Sowizral");
+            EmployeeInMemory employee1 = new EmployeeInMemory("Konrad", "Sowizral");
             employee1.AddGrade(5);
             employee1.AddGrade(2);
             employee1.AddGrade(1.4f);
@@ -60,7 +60,7 @@
         public void GetZeroValueShouldReturnCorrectValue()
         {
             //arrange
-            Employee employee1 = new Employee("Konrad", "Sowizral");
+            EmployeeInMemory employee1 = new EmployeeInMemory("Konrad", "Sowizral");
             employee1.AddGrade(0);
             employee1.AddGrade(2);
             employee1.AddGrade(1.4f);
@@ -78,7 +78,7 @@
         public void GetStringValueAsFloatShouldReturnCorrectMaxValue()
         {
             //arrange
-            Employee employee1 = new Employee("Konrad", "Sowizral");
+            EmployeeInMemory employee1 = new EmployeeInMemory("Konrad", "Sowizral");
             employee1.AddGrade(0);
             employee1.AddGrade("22");
             employee1.AddGrade(1.4f);
@@ -97,7 +97,7 @@
         {
             //arrange
 
-            Employee employee1 = new Employee("Konrad", "Sowizral");
+            EmployeeInMemory employee1 = new EmployeeInMemory("Konrad", "Sowizral");
             employee1.AddGrade('b');
 
             //act
@@ -114,7 +114,7 @@
         {
             //arrange
 
-            Employee employee1 = new Employee("Konrad", "Sowizral");
+            EmployeeInMemory employee1 = new EmployeeInMemory("Konrad", "Sowizral");
             employee1.AddGrade('c');
             employee1.AddGrade(60);
             employee1.AddGrade("90");
